@@ -154,6 +154,27 @@ This project was tested with:
 <br>
 
 ## 🏗  Installation
+install.sh is changed for usage on GPU: Quadro RTX 8000 
+in order for the installation to work you need cuda 12.1 and gcc-11
+if there is roblems with instaling cuda 12.1 , make sure to purge cuda from the system
+### purge cuda and nvidia driver (only if needed ) 
+sudo apt-get --purge remove 'cuda*'
+sudo apt-get --purge remove 'libcublas*' 'libnccl*' 'libnpp*' 'libcufft*' 'libcurand*' 'libcusolver*' 'libcusparse*'
+sudo apt-get autoremove
+sudo apt-get autoclean
+sudo rm -rf /usr/local/cuda*
+### install nvidia driver (only if needed)
+
+### install cuda 12.1 
+follow instructions from link below with one change . 
+replace the last install comand to this if you allready have installed the nvidia driver 
+sudo apt-get -y install cuda-toolkit-12-1
+(https://developer.nvidia.com/cuda-12-1-0-download-archive)
+
+
+### install gcc-11
+sudo apt install gcc-11 g++-11
+### do the installation
 Simply run [`install.sh`](install.sh) to install all dependencies in a new conda environment 
 named `spt`. 
 ```bash
