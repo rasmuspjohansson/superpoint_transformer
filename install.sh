@@ -5,7 +5,12 @@ PROJECT_NAME=spt
 PYTHON=3.8
 TORCH=2.2.0
 CUDA_SUPPORTED=(11.8 12.1)
+#my gpu is so OLD I need to tell cuda to not compile code for teh newest GPU versions
+export TORCH_CUDA_ARCH_LIST="7.5"
 
+#cuda 12.1 is not compatible with newer gcc
+export CC=/usr/bin/gcc-11
+export CXX=/usr/bin/g++-11
 
 # Recover the project's directory from the position of the install.sh
 # script and move there. Not doing so would install some dependencies in
@@ -73,6 +78,12 @@ conda create --name ${PROJECT_NAME} python=${PYTHON} -y
 source ${CONDA_DIR}/etc/profile.d/conda.sh  
 conda activate ${PROJECT_NAME}
 
+#my gpu is so OLD I need to tell cuda to not compile code for teh newest GPU versions
+export TORCH_CUDA_ARCH_LIST="7.5"
+
+
+export CC=/usr/bin/gcc-11
+export CXX=/usr/bin/g++-11
 echo
 echo
 echo "⭐ Installing conda and pip dependencies"
