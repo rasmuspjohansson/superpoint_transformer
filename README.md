@@ -550,7 +550,8 @@ python src/train.py experiment=panoptic/kitti360_11g
 # Train SuperCluster on DALES
 python src/train.py experiment=panoptic/dales_11g
 ```
-
+### Downloading DALES
+downloading dales_objects from https://sites.google.com/a/udayton.edu/vasari1/research/earth-vision/dales
 
 ### CUDA Out-Of-Memory Errors
 Having some CUDA OOM errors 💀💾 ? Here are some parameters you can play 
