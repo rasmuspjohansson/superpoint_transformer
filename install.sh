@@ -140,7 +140,8 @@ echo
 # This is a linux-only fix:
 # https://stackoverflow.com/a/68845839
 conda install -c conda-forge libstdcxx-ng
-pip install git+https://github.com/drprojects/point_geometric_features.git
+#avoiding this bug: https://github.com/drprojects/superpoint_transformer/issues/197
+pip install git+https://github.com/drprojects/point_geometric_features.git@4102aa9
 
 echo
 echo
