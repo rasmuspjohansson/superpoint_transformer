@@ -139,11 +139,9 @@ class GridSampling3D(Transform):
 
     def _process(self, data_in):
 
-        print("data_in:"+str(data_in))
 
         # In-place option will modify the input Data object directly
         data = data_in if self.inplace else data_in.clone()
-        print("data:"+str(data))
         # If the aggregation mode is 'last', shuffle the points order.
         # Note that voxelization of point attributes will be stochastic
         if self.mode == 'last':
@@ -151,14 +149,12 @@ class GridSampling3D(Transform):
 
         # Convert point coordinates to the voxel grid coordinates
         coords = torch.round((data.pos) / self.grid_size)
-        print("coords:"+str(coords))
 
         # Match each point with a voxel identifier
         if 'batch' not in data:
             cluster = grid_cluster(coords, torch.ones(3, device=coords.device))
         else:
             cluster = voxel_grid(coords, data.batch, 1)
-        print("cluster:"+str(cluster))
 
         # Reindex the clusters to make sure the indices used are
         # consecutive. Basically, we do not want cluster indices to span
@@ -166,12 +162,10 @@ class GridSampling3D(Transform):
         # this will affect the speed and output size of torch_scatter
         # operations
         cluster, unique_pos_indices = consecutive_cluster(cluster)
-        print("cluster:"+str(cluster))
 
         # Perform voxel aggregation
         data = _group_data(
             data, cluster, unique_pos_indices, mode=self.mode, bins=self.bins)
-        print("data:"+str(data))
 
         # Optionally convert quantize the coordinates. This is useful
         # for sparse convolution models
