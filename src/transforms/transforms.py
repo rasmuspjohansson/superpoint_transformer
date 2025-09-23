@@ -21,7 +21,6 @@ class Transform(BaseTransform):
         assert isinstance(x, (self._IN_TYPE, list))
         if isinstance(x, list):
             return [self.__call__(e) for e in x]
-        print("x:"+str(x))
         return self._process(x)
 
     @property

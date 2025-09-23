@@ -67,15 +67,10 @@ def atomic_to_histogram(item, idx, n_bins=None):
     # to 0 to save some memory and compute in one-hot encoding and
     # scatter_add
     offset = item.min()
-    print("offset:"+str(offset))
-    print("item:"+str(item))
     item = torch.nn.functional.one_hot(item - offset)
-    print("onhot item:"+str(item))
 
     # Count number of occurrence of each value
     hist = scatter_add(item, idx, dim=0)
-    print("hist:"+str(hist))
-    print("hist.shape:"+str(hist.shape))
     N = hist.shape[0]
     device = hist.device
 
@@ -83,15 +78,9 @@ def atomic_to_histogram(item, idx, n_bins=None):
     # offsetting
     bins_before = torch.zeros(
         N, offset, device=device, dtype=torch.long)
-    print("bins_before:"+str(bins_before))
     hist = torch.cat((bins_before, hist), dim=1)
-    print("hist:"+str(hist))
 
     # Append columns to the histogram for unobserved classes/bins
-    print("N:"+str(N))
-    print("n_bins:"+str(n_bins))
-    print("hist.shape[1]:"+str(hist.shape[1]))
-    print("device:"+str(device))
     bins_after = torch.zeros(
         N, n_bins - hist.shape[1], device=device,
         dtype=torch.long)

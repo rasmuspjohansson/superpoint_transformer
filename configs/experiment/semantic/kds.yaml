@@ -13,7 +13,7 @@ defaults:
 
 trainer:
   max_epochs: 400
-
+  default_root_dir: vox01kdsdata
 model:
   optimizer:
     lr: 0.01
