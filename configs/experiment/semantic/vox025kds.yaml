@@ -11,9 +11,12 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
+
+# task name, determines output directory path
+task_name: "kdsvox025"
+
 trainer:
   max_epochs: 400
-  default_root_dir: kdsvox025
 model:
   optimizer:
     lr: 0.01
