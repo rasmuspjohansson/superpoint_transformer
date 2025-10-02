@@ -25,14 +25,44 @@ OBJECTS_UNTAR_NAME = "DALESObjects"
 ########################################################################
 
 # The validation set was arbitrarily chosen as the x last train tiles:
-TILES = {
-    'train': [
-        '1km_6130_613'],
-    'val': [
-        '1km_6143_590'],
+#TILES = {
+#    'train': [
+#        '1km_6130_613'],
+#    'val': [
+#        '1km_6143_590'],
+#
+#    'test': [
+#        '1km_6131_613']}
 
+
+
+#removed becasue they caused the program to fail : 1km_6153_597,'1km_6157_592',1km_6139_586,1km_6157_593,1km_6147_591,1km_6157_594 1km_6139_588,1km_6150_594
+TILES = {
+    #'train': ['1km_6149_601','1km_6130_613','1km_6143_589','1km_6147_588', '1km_6150_590','1km_6150_591', '1km_6143_591', '1km_6147_590','1km_6139_586',],
+    #'val': [
+    #    '1km_6143_590'
+    #],
+    #'test': [
+    #    '1km_6131_613'
+    #]
+    #}
+
+    'train': ['1km_6149_601','1km_6130_613', '1km_6143_589', '1km_6147_588', '1km_6150_590', 
+         '1km_6150_591',  '1km_6157_592',
+        '1km_6139_586', '1km_6143_591', '1km_6147_590', '1km_6150_592', '1km_6153_598', '1km_6139_587', '1km_6143_592', '1km_6150_593', '1km_6153_599',
+        '1km_6143_593', '1km_6147_592'],
+
+
+
+
+    'val': [
+        '1km_6143_590'
+    ],
     'test': [
-        '1km_6131_613']}
+        '1km_6131_613'
+    ]
+}
+
 
 
 ########################################################################
@@ -55,13 +85,12 @@ ID2TRAINID[5] = 3    # High vegetation
 ID2TRAINID[6] = 4    # Building
 ID2TRAINID[7] = 5    # Low point (noise)
 ID2TRAINID[9] = 6    # Water
-ID2TRAINID[14] = 7   # Transmission Tower
-ID2TRAINID[17] = 8   # High noise
-ID2TRAINID[18] = 9   # Reserved for ASPRS
+ID2TRAINID[14] = 7   # Wire
+ID2TRAINID[17] = 8   # Bridge deck
+ID2TRAINID[18] = 9   # Highnoise
 
 
 CLASS_NAMES = [
-    'Unclassified',
     'Ground',
     'LowVegetation',
     'MediumVegetation',
@@ -71,7 +100,8 @@ CLASS_NAMES = [
     'Water',
     'wire',
     'BridgeDeck',
-    'HighNoise']
+    'HighNoise',
+    'Something']
 
 
 

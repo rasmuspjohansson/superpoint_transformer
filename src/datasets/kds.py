@@ -65,6 +65,8 @@ def read_kds_tile(
     key = 'testing'
     with open(filepath, "rb") as f:
         las = laspy.read(f)        
+        print(filepath)
+        print(f"Number of points: {len(las.points)}")
 
 
     

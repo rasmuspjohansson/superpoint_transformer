@@ -258,7 +258,8 @@ named `spt`.
 ## 🚀  Usage
 ### Datasets
 See the [Datasets page](docs/datasets.md) to set up your datasets. 
-
+### Prediction
+python predict_many.py --inputlaz path/to/(folder or las.laz) --output_folder path/to/outputfolder --ckpt_path path/to/checkpoints/a_file.ckpt
 ### Evaluation
 Use the following command structure for evaluating our models from a checkpoint 
 file `checkpoint.ckpt`, where `<task>` should be `semantic` for using SPT and `panoptic` for using 
@@ -270,8 +271,12 @@ python src/eval.py experiment=<task>/<dataset> ckpt_path=/path/to/your/checkpoin
 ```
 
 Some examples:
-
 ```bash
+# Predict SPT on KDS .laz data 
+python predict_many.py --inputlaz /mnt/T/mnt/trainingdata/bygningsudpegning/hf_strandbo_1km2/laz/1km_6173_728.laz --output_folder /mnt/T/mnt/trainingdata/bygningsudpegning/hf_strandbo_1km2/predictedlaz --ckpt_path logs/kdsvox025/runs/2025-09-29_17-16-08/checkpoints/last.ckpt
+
+
+
 # Evaluate SPT on S3DIS Fold 5
 python src/eval.py experiment=semantic/s3dis datamodule.fold=5 ckpt_path=/path/to/your/checkpoint.ckpt
 
@@ -322,6 +327,9 @@ python src/train.py experiment=<task>/<dataset>
 Some examples:
 
 ```bash
+# Train SPT on KDS laz data
+python src/train.py experiment=semantic/vox025kds.yaml
+
 # Train SPT on S3DIS Fold 5
 python src/train.py experiment=semantic/s3dis datamodule.fold=5
 

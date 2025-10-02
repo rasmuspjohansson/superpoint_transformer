@@ -267,12 +267,14 @@ class GroundElevation(Transform):
 
     def __init__(
             self,
-            z_threshold=1.5,
+            z_threshold=10.5, # orignal value was 1.5 
             verticality_threshold=None,
             xy_grid=None,
             model='ransac',
             scale=3.0,
             **kwargs):
+        #print("z_threshold"+str(z_threshold))
+        #print(verticality_threshold)
         if verticality_threshold is not None:
             assert 0 < verticality_threshold < 1
         if xy_grid is not None:
@@ -290,6 +292,9 @@ class GroundElevation(Transform):
         # Recover the point positions
         pos = data.pos
 
+
+        print(data)
+
         # Initialize a mask for the filtering out as many non-ground
         # points as possible, to facilitate the subsequent search of the
         # ground surface in the point cloud
@@ -302,6 +307,7 @@ class GroundElevation(Transform):
         if self.z_threshold is not None:
             mask = mask & filter_by_z_distance_of_global_min(
                 pos, self.z_threshold)
+            print("mask.sum()"+str(mask.sum()))
 
         # See `filter_by_verticality` for more details
         if self.verticality_threshold and (0 < self.verticality_threshold < 1):
@@ -325,6 +331,7 @@ class GroundElevation(Transform):
         # Fit a model to the trimmed points
         if self.model == 'ransac':
             model = single_plane_model(pos_trimmed, **self.kwargs)
+            #print("model:"+str(model))
         elif self.model == 'knn':
             model = neighbor_interpolation_model(pos_trimmed, **self.kwargs)
         elif self.model == 'mlp':
@@ -333,9 +340,21 @@ class GroundElevation(Transform):
         # Compute the elevation of each point wrt the estimated ground
         # surface
         elevation = model(pos).view(-1, 1)
+        print("elevation:"+str(elevation))  # the elevastion data i elevation:torch.Size([900033, 1])
 
         # Scale the elevation and save it in the Data object
         data.elevation = elevation.view(-1, 1) / self.scale
+        # Flatten to 1D to compute stats
+        x_flat = data.elevation.view(-1)
+
+        # Min, median, max
+        min_val = torch.min(x_flat)
+        median_val = torch.median(x_flat)
+        max_val = torch.max(x_flat)
+
+        print("Min:", min_val.item())
+        print("Median:", median_val.item())
+        print("Max:", max_val.item())
 
         return data
 

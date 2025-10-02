@@ -93,6 +93,32 @@ def filter_by_verticality(verticality, threshold):
 
 
 def single_plane_model(pos, random_state=0, residual_threshold=1e-3):
+    #print("pos:"+str(pos))
+    #print(len(pos))
+
+    if len(pos)<3:
+        print("#"*100)
+        print("RAnzac wont work i simply create two extra points by copying the first point while adding to the x and y value")
+        # Take the first point
+        first_point = pos[0].unsqueeze(0).clone()
+        #print("first_point:"+str(first_point))
+        another_copy = first_point.clone()
+
+        #update the x and y values 
+        first_point[0][0]+=10
+        #print("first_point:"+str(first_point))
+        first_point[0][1]+=10
+        another_copy[0][0]-=10
+        another_copy[0][1]-=10
+
+        #apend the midified copy of the points
+        pos= torch.cat([pos,first_point,another_copy])
+        print("pos after adding two new points:"+str(pos))
+        print("#"*100)
+
+
+
+
     """Model the ground as a single plane using RANSAC.
 
     Returns a callable taking an XYZ tensor as input and returning the
@@ -110,6 +136,9 @@ def single_plane_model(pos, random_state=0, residual_threshold=1e-3):
 
     xy = pos[:, :2].cpu().numpy()
     z = pos[:, 2].cpu().numpy()
+    #print("xy:"+str(xy))
+
+    #print("z:"+str(z))
 
     # Search the ground plane using RANSAC
     ransac = RANSACRegressor(
