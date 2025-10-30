@@ -26,12 +26,12 @@ OBJECTS_UNTAR_NAME = "DALESObjects"
 
 TILES = {
     'train': [
-        '1km_6130_613'],
+        '1km_6143_589'],
     'val': [
         '1km_6143_590'],
 
     'test': [
-        '1km_6131_613']}
+        '1km_6147_588']}
 
 
 
