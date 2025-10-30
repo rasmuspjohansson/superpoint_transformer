@@ -327,6 +327,10 @@ python src/train.py experiment=<task>/<dataset>
 Some examples:
 
 ```bash
+# Train SPT on the toy_laz_dataset that comes with the repo
+python src/train.py experiment=semantic/vox025toy_laz_dataset.yaml
+
+
 # Train SPT on KDS laz data
 python src/train.py experiment=semantic/vox025kds.yaml
 
