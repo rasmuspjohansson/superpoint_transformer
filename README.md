@@ -154,7 +154,8 @@ This project was tested with:
 <br>
 
 ## 🏗  Installation
-install.sh is changed for usage on GPU: Quadro RTX 8000 
+install_CUDA_ARCH_7_5.sh is setup for usage on GPU: Quadro RTX 8000
+install.sh should work on a more modern GPU 
 in order for the installation to work you need cuda 12.1 and gcc-11
 if there is roblems with instaling cuda 12.1 , make sure to purge cuda from the system
 ### purge cuda and nvidia driver (only if needed ) 
@@ -175,6 +176,7 @@ sudo apt-get -y install cuda-toolkit-12-1
 ### install gcc-11
 sudo apt install gcc-11 g++-11
 ### do the installation
+please note that two different .sh scripts are provided for installation. install.sh and install_CUDA_ARCH_7_5.sh depending on the GPU you have acess to
 Simply run [`install.sh`](install.sh) to install all dependencies in a new conda environment 
 named `spt`. 
 ```bash
