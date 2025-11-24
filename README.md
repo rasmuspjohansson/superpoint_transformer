@@ -1,4 +1,5 @@
-from torch.utils.data import DataLoader<div align="center">
+This code have been migrated to 
+https://github.com/SDFIdk/laz-superpoint_transformer
 
 # Superpoint Transformer
 
