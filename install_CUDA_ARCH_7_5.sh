@@ -114,6 +114,7 @@ pip install wandb
 pip install open3d
 pip install gdown
 pip install ipyfilechooser
+pip install laspy
 
 echo
 echo
