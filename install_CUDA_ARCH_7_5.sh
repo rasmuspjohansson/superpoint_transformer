@@ -2,7 +2,7 @@
 
 # Local variables
 PROJECT_NAME=spt
-PYTHON=3.8
+PYTHON=3.10
 TORCH=2.2.0
 CUDA_SUPPORTED=(11.8 12.1)
 #my gpu is so OLD I need to tell cuda to not compile code for teh newest GPU versions
@@ -114,7 +114,8 @@ pip install wandb
 pip install open3d
 pip install gdown
 pip install ipyfilechooser
-pip install laspy
+pip install laspy[lazrs]
+pip install lazrs
 
 echo
 echo
